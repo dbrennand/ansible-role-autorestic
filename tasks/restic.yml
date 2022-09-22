@@ -1,0 +1,33 @@
+---
+# restic tasks file for backup
+- name: "Download restic binary v{{ backup_restic_version }} for aarch64"
+  # E.g., Raspberry Pi 4
+  ansible.builtin.get_url:
+    url: "https://github.com/restic/restic/releases/download/v{{ backup_restic_version }}/restic_{{ backup_restic_version }}_linux_arm64.bz2"
+    dest: /tmp/restic.bz2
+    mode: 0755
+  when: ansible_architecture == "aarch64"
+
+- name: "Download restic binary v{{ backup_restic_version }} for armv7l"
+  # E.g., Raspberry Pi 3 (32bit)
+  ansible.builtin.get_url:
+    url: "https://github.com/restic/restic/releases/download/v{{ backup_restic_version }}/restic_{{ backup_restic_version }}_linux_arm.bz2"
+    dest: /tmp/restic.bz2
+    mode: 0755
+  when: ansible_architecture == "armv7l"
+
+- name: "Download restic binary v{{ backup_restic_version }} for x86_64"
+  ansible.builtin.get_url:
+    url: "https://github.com/restic/restic/releases/download/v{{ backup_restic_version }}/restic_{{ backup_restic_version }}_linux_amd64.bz2"
+    dest: /tmp/restic.bz2
+    mode: 0755
+  when: ansible_architecture == "x86_64"
+
+- name: Extract and install restic # noqa no-changed-when
+  ansible.builtin.command:
+    cmd: cd /tmp/ && bzip2 -d /tmp/restic.bz2 && mv /tmp/restic /usr/local/bin/
+
+- name: Ensure restic is executable
+  ansible.builtin.file:
+    path: /usr/local/bin/restic
+    mode: +x

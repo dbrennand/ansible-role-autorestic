@@ -1,0 +1,33 @@
+---
+# autorestic tasks file for backup
+- name: "Download autorestic binary v{{ backup_autorestic_version }} for aarch64"
+  # E.g., Raspberry Pi 4
+  ansible.builtin.get_url:
+    url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ backup_autorestic_version }}/autorestic_{{ backup_autorestic_version }}_linux_arm64.bz2" # noqa yaml[line-length]
+    dest: /tmp/autorestic.bz2
+    mode: 0755
+  when: ansible_architecture == "aarch64"
+
+- name: "Download autorestic binary v{{ backup_autorestic_version }} for armv7l"
+  # E.g., Raspberry Pi 3 (32bit)
+  ansible.builtin.get_url:
+    url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ backup_autorestic_version }}/autorestic_{{ backup_autorestic_version }}_linux_arm.bz2"
+    dest: /tmp/autorestic.bz2
+    mode: 0755
+  when: ansible_architecture == "armv7l"
+
+- name: "Download autorestic binary v{{ backup_autorestic_version }} for x86_64"
+  ansible.builtin.get_url:
+    url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ backup_autorestic_version }}/autorestic_{{ backup_autorestic_version }}_linux_amd64.bz2" # noqa yaml[line-length]
+    dest: /tmp/autorestic.bz2
+    mode: 0755
+  when: ansible_architecture == "x86_64"
+
+- name: Extract and install autorestic # noqa no-changed-when
+  ansible.builtin.command:
+    cmd: cd /tmp/ && bzip2 -d /tmp/autorestic.bz2 && mv /tmp/autorestic /usr/local/bin/
+
+- name: Ensure autorestic is executable
+  ansible.builtin.file:
+    path: /usr/local/bin/autorestic
+    mode: +x

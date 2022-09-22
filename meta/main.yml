@@ -1,0 +1,16 @@
+galaxy_info:
+  role_name: backup
+  author: dbrennand
+  description: Configure backups using autorestic
+  license: license (MIT)
+  min_ansible_version: "2.1"
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+  galaxy_tags:
+    - backup
+    - backups
+    - autorestic
+    - restic
+dependencies: []

@@ -1,0 +1,57 @@
+---
+# tasks file for backup
+- name: Install bzip2
+  ansible.builtin.apt:
+    name: bzip2
+    state: present
+  become: true
+
+- name: "Check restic is installed at version {{ backup_restic_version }}"
+  ansible.builtin.command:
+    cmd: restic version
+  changed_when: false
+  ignore_errors: true
+  register: restic_install_status
+
+- name: Import restic install tasks
+  ansible.builtin.import_tasks: restic.yml
+  when: restic_install_status.rc != 0 or not restic_install_status.stdout is search(backup_restic_version)
+
+- name: "Check autorestic is installed at version {{ backup_autorestic_version }}"
+  ansible.builtin.command:
+    cmd: autorestic --version
+  changed_when: false
+  ignore_errors: true
+  register: autorestic_install_status
+
+- name: Import autorestic install tasks
+  ansible.builtin.import_tasks: autorestic.yml
+  when: autorestic_install_status.rc != 0 or not autorestic_install_status.stdout is search(backup_autorestic_version)
+
+- name: Create autorestic configuration file
+  ansible.builtin.copy:
+    content: "{{ backup_autorestic_config | to_nice_yaml }}"
+    dest: ~/.autorestic.yml
+    mode: 0700
+
+- name: Run autorestic check
+  ansible.builtin.command:
+    cmd: autorestic check
+  register: autorestic_check_status
+  changed_when: "'Everything is fine.' not in autorestic_check_status.stdout"
+  when: backup_autorestic_check
+
+- name: Configure autorestic crontab
+  block:
+    - name: Configure autorestic crontab PATH
+      ansible.builtin.cron:
+        name: PATH
+        env: true
+        job: /usr/local/bin:/usr/bin:/bin
+
+    - name: Configure autorestic crontab job
+      ansible.builtin.cron:
+        name: Configure autorestic crontab job
+        minute: "*/5"
+        job: autorestic -c ~/.autorestic.yml --ci cron > /tmp/autorestic.log 2>&1
+  when: backup_autorestic_cron
