@@ -24,7 +24,7 @@
   when: ansible_architecture == "x86_64"
 
 - name: Extract and install autorestic # noqa no-changed-when
-  ansible.builtin.command:
+  ansible.builtin.shell:
     cmd: cd /tmp/ && bzip2 -d /tmp/autorestic.bz2 && mv /tmp/autorestic /usr/local/bin/
 
 - name: Ensure autorestic is executable

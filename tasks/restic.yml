@@ -24,7 +24,7 @@
   when: ansible_architecture == "x86_64"
 
 - name: Extract and install restic # noqa no-changed-when
-  ansible.builtin.command:
+  ansible.builtin.shell:
     cmd: cd /tmp/ && bzip2 -d /tmp/restic.bz2 && mv /tmp/restic /usr/local/bin/
 
 - name: Ensure restic is executable
