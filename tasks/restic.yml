@@ -25,7 +25,8 @@
 
 - name: Extract and install restic # noqa no-changed-when
   ansible.builtin.shell:
-    cmd: cd /tmp/ && bzip2 -d /tmp/restic.bz2 && mv /tmp/restic /usr/local/bin/
+    cmd: cd /tmp/ && bzip2 -f -d /tmp/restic.bz2 && mv /tmp/restic /usr/local/bin/
+  become: true
 
 - name: Ensure restic is executable
   ansible.builtin.file:
