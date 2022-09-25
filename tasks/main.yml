@@ -34,6 +34,12 @@
     dest: ~/.autorestic.yml
     mode: 0600
 
+- name: Run autorestic info
+  ansible.builtin.command:
+    cmd: autorestic info
+  changed_when: false
+  when: autorestic_info
+
 - name: Run autorestic check
   ansible.builtin.command:
     cmd: autorestic check
