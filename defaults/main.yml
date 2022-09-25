@@ -1,8 +1,8 @@
 ---
-# defaults file for backup
-backup_restic_version: 0.14.0
-backup_autorestic_version: 1.7.3
-backup_autorestic_config: |-
+# defaults file for autorestic
+autorestic_version: 1.7.3
+autorestic_restic_version: 0.14.0
+autorestic_config: |-
   version: 2
   locations:
     home:
@@ -18,5 +18,5 @@ backup_autorestic_config: |-
       env:
         B2_ACCOUNT_ID: ID
         B2_ACCOUNT_KEY: Key
-backup_autorestic_check: true
-backup_autorestic_cron: true
+autorestic_check: true
+autorestic_cron: true

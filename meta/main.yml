@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: backup
+  role_name: autorestic
   author: dbrennand
   description: Configure backups using autorestic
   license: license (MIT)
@@ -9,8 +9,8 @@ galaxy_info:
       versions:
         - bullseye
   galaxy_tags:
-    - backup
-    - backups
     - autorestic
     - restic
+    - backup
+    - backups
 dependencies: []

@@ -1,5 +1,5 @@
 ---
-# restic tasks file for backup
+# restic tasks file for autorestic
 - name: "Download restic binary v{{ backup_restic_version }} for aarch64"
   # E.g., Raspberry Pi 4
   ansible.builtin.get_url:
