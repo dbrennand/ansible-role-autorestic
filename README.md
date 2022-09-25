@@ -39,6 +39,12 @@ autorestic_config: |-
 The autorestic YAML configuration to be placed into the `~/.autorestic.yml` file. See the [autorestic documentation](https://autorestic.vercel.app/config) for details on the YAML configuration.
 
 ```yaml
+autorestic_info: false
+```
+
+Whether or not to run `autorestic info` to validate that the autorestic YAML configuration is valid.
+
+```yaml
 autorestic_check: false
 ```
 
