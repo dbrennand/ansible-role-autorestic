@@ -3,7 +3,7 @@
 ![Ansible-Lint](https://github.com/dbrennand/ansible-role-autorestic/actions/workflows/ansible-lint.yml/badge.svg)
 ![Ansible-Release](https://github.com/dbrennand/ansible-role-autorestic/actions/workflows/ansible-release.yml/badge.svg)
 
-An Ansible role to configure backups using [autorestic](https://autorestic.vercel.app/).
+Ansible role to configure backups using [autorestic](https://autorestic.vercel.app/).
 
 ## Requirements
 
