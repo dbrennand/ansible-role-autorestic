@@ -32,7 +32,7 @@
   ansible.builtin.copy:
     content: "{{ autorestic_config }}"
     dest: ~/.autorestic.yml
-    mode: 0700
+    mode: 0600
 
 - name: Run autorestic check
   ansible.builtin.command:
