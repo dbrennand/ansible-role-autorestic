@@ -39,13 +39,13 @@ autorestic_config: |-
 The autorestic YAML configuration to be placed into the `~/.autorestic.yml` file. See the [autorestic documentation](https://autorestic.vercel.app/config) for details on the YAML configuration.
 
 ```yaml
-autorestic_check: true
+autorestic_check: false
 ```
 
 Whether or not to run `autorestic check` to make sure backends are configured properly and initialises them if they are not already.
 
 ```yaml
-autorestic_cron: true
+autorestic_cron: false
 ```
 
 Whether or not to create an autorestic crontab entry to trigger automated backups. Autorestic locations need to be configured with `cron`.

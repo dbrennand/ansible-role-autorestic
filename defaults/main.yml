@@ -18,5 +18,5 @@ autorestic_config: |-
       env:
         B2_ACCOUNT_ID: ID
         B2_ACCOUNT_KEY: Key
-autorestic_check: true
-autorestic_cron: true
+autorestic_check: false
+autorestic_cron: false
