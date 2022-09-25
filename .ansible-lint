@@ -7,4 +7,6 @@
 exclude_paths:
   - .github/
   - .git/
+skip_list:
+  - template-instead-of-copy
 use_default_rules: true
