@@ -1,24 +1,24 @@
 ---
 # restic tasks file for autorestic
-- name: "Download restic binary v{{ backup_restic_version }} for aarch64"
+- name: "Download restic binary v{{ autorestic_restic_version }} for aarch64"
   # E.g., Raspberry Pi 4
   ansible.builtin.get_url:
-    url: "https://github.com/restic/restic/releases/download/v{{ backup_restic_version }}/restic_{{ backup_restic_version }}_linux_arm64.bz2"
+    url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_arm64.bz2"
     dest: /tmp/restic.bz2
     mode: 0755
   when: ansible_architecture == "aarch64"
 
-- name: "Download restic binary v{{ backup_restic_version }} for armv7l"
+- name: "Download restic binary v{{ autorestic_restic_version }} for armv7l"
   # E.g., Raspberry Pi 3 (32bit)
   ansible.builtin.get_url:
-    url: "https://github.com/restic/restic/releases/download/v{{ backup_restic_version }}/restic_{{ backup_restic_version }}_linux_arm.bz2"
+    url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_arm.bz2"
     dest: /tmp/restic.bz2
     mode: 0755
   when: ansible_architecture == "armv7l"
 
-- name: "Download restic binary v{{ backup_restic_version }} for x86_64"
+- name: "Download restic binary v{{ autorestic_restic_version }} for x86_64"
   ansible.builtin.get_url:
-    url: "https://github.com/restic/restic/releases/download/v{{ backup_restic_version }}/restic_{{ backup_restic_version }}_linux_amd64.bz2"
+    url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_amd64.bz2"
     dest: /tmp/restic.bz2
     mode: 0755
   when: ansible_architecture == "x86_64"

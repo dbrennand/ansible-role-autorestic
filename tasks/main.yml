@@ -6,7 +6,7 @@
     state: present
   become: true
 
-- name: "Check restic is installed at version {{ backup_restic_version }}"
+- name: "Check restic is installed at version {{ autorestic_restic_version }}"
   ansible.builtin.command:
     cmd: restic version
   changed_when: false
@@ -15,9 +15,9 @@
 
 - name: Import restic install tasks
   ansible.builtin.import_tasks: restic.yml
-  when: restic_install_status.rc != 0 or not restic_install_status.stdout is search(backup_restic_version)
+  when: restic_install_status.rc != 0 or not restic_install_status.stdout is search(autorestic_restic_version)
 
-- name: "Check autorestic is installed at version {{ backup_autorestic_version }}"
+- name: "Check autorestic is installed at version {{ autorestic_version }}"
   ansible.builtin.command:
     cmd: autorestic --version
   changed_when: false
@@ -26,11 +26,11 @@
 
 - name: Import autorestic install tasks
   ansible.builtin.import_tasks: autorestic.yml
-  when: autorestic_install_status.rc != 0 or not autorestic_install_status.stdout is search(backup_autorestic_version)
+  when: autorestic_install_status.rc != 0 or not autorestic_install_status.stdout is search(autorestic_version)
 
 - name: Create autorestic configuration file
   ansible.builtin.copy:
-    content: "{{ backup_autorestic_config }}"
+    content: "{{ autorestic_config }}"
     dest: ~/.autorestic.yml
     mode: 0700
 
@@ -39,7 +39,7 @@
     cmd: autorestic check
   register: autorestic_check_status
   changed_when: "'Everything is fine.' not in autorestic_check_status.stdout"
-  when: backup_autorestic_check
+  when: autorestic_check
 
 - name: Configure autorestic crontab
   block:
@@ -54,4 +54,4 @@
         name: Configure autorestic crontab job
         minute: "*/5"
         job: autorestic -c ~/.autorestic.yml --ci cron > /tmp/autorestic.log 2>&1
-  when: backup_autorestic_cron
+  when: autorestic_cron
