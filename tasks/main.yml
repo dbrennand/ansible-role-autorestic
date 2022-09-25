@@ -9,9 +9,9 @@
 - name: "Check restic is installed at version {{ autorestic_restic_version }}"
   ansible.builtin.command:
     cmd: restic version
-  changed_when: false
-  ignore_errors: true
   register: restic_install_status
+  changed_when: not restic_install_status.stdout is search(autorestic_restic_version)
+  ignore_errors: true
 
 - name: Import restic install tasks
   ansible.builtin.import_tasks: restic.yml
@@ -20,9 +20,9 @@
 - name: "Check autorestic is installed at version {{ autorestic_version }}"
   ansible.builtin.command:
     cmd: autorestic --version
-  changed_when: false
-  ignore_errors: true
   register: autorestic_install_status
+  changed_when: not autorestic_install_status.stdout is search(autorestic_version)
+  ignore_errors: true
 
 - name: Import autorestic install tasks
   ansible.builtin.import_tasks: autorestic.yml
