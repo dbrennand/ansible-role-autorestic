@@ -25,5 +25,4 @@ jobs:
 
       - run: pip3 install ansible-core
 
-      - run: >-
-          ansible-galaxy role import --api-key ${{ secrets.GALAXY_API_KEY }} ${{ github.repository_owner }} ${{ steps.repository_name.outputs.repository_name }}
+      - run: ansible-galaxy role import --api-key ${{ secrets.GALAXY_API_KEY }} ${{ github.repository_owner }} ${{ steps.repository_name.outputs.repository_name }}
