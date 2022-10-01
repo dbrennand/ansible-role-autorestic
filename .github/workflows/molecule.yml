@@ -1,0 +1,17 @@
+name: Molecule
+on: [push, pull_request]
+
+defaults:
+  run:
+    working-directory: dbrennand.autorestic
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: dbrennand.autorestic
+      - uses: gofrolist/molecule-action@v2
+        with:
+          molecule_working_dir: dbrennand.autorestic
