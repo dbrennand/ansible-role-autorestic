@@ -1,6 +1,8 @@
 # Ansible Role: dbrennand.autorestic
 
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/dbrennand/ansible-role-autorestic)
 ![Ansible-Lint](https://github.com/dbrennand/ansible-role-autorestic/actions/workflows/ansible-lint.yml/badge.svg)
+![Molecule](https://github.com/dbrennand/ansible-role-autorestic/actions/workflows/molecule.yml/badge.svg)
 ![Ansible-Release](https://github.com/dbrennand/ansible-role-autorestic/actions/workflows/ansible-release.yml/badge.svg)
 
 Ansible role to configure backups using [autorestic](https://autorestic.vercel.app/).
@@ -68,6 +70,10 @@ None.
   roles:
     - dbrennand.autorestic
 ```
+
+## Molecule Tests 🧪
+
+To test the role, use Molecule: `molecule test`
 
 ## License
 
