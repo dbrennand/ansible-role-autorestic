@@ -8,7 +8,7 @@
       when: ansible_distribution == "Debian"
 
     - name: Update pacman cache
-      community.general.pacman:
+      community.general.pacman: # noqa syntax-check
         update_cache: true
       when: ansible_distribution == "Archlinux"
   tasks:
