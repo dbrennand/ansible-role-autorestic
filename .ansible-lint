@@ -9,6 +9,4 @@ exclude_paths:
   - .git/
 skip_list:
   - template-instead-of-copy
-mock_modules:
-  - community.general.pacman
 use_default_rules: true
