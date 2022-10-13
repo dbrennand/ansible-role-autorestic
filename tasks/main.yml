@@ -1,7 +1,7 @@
 ---
 # tasks file for autorestic
 - name: Install bzip2
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name: bzip2
     state: present
   become: true

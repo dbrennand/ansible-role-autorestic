@@ -3,11 +3,12 @@ galaxy_info:
   author: dbrennand
   description: Configure backups using autorestic
   license: license (MIT)
-  min_ansible_version: "2.1"
+  min_ansible_version: "2.9"
   platforms:
     - name: Debian
       versions:
         - bullseye
+    - name: ArchLinux
   galaxy_tags:
     - autorestic
     - restic
