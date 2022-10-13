@@ -8,6 +8,7 @@ galaxy_info:
     - name: Debian
       versions:
         - bullseye
+    - name: ArchLinux
   galaxy_tags:
     - autorestic
     - restic
