@@ -7,6 +7,9 @@ platforms:
   - name: instance
     image: geerlingguy/docker-debian10-ansible:latest
     pre_build_image: true
+  - name: instance1
+    image: carlodepieri/docker-archlinux-ansible:latest
+    pre_build_image: true
 provisioner:
   name: ansible
 verifier:
