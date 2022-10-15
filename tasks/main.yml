@@ -1,5 +1,12 @@
 ---
 # tasks file for autorestic
+- name: Import restic removal tasks
+  ansible.builtin.import_tasks: remove.yml
+  when: autorestic_remove is true
+
+- meta: end_host
+  when: autorestic_remove is true
+
 - name: Install bzip2
   ansible.builtin.package:
     name: bzip2
