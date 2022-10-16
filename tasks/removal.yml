@@ -1,3 +1,5 @@
+---
+# removal tasks file for autorestic
 - name: Remove restic, autorestic, configuration and crontab entry
   block:
     - name: Remove restic binary
