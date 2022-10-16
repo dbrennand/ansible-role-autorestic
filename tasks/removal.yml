@@ -1,6 +1,7 @@
 ---
 # removal tasks file for autorestic
-- name: Remove restic, autorestic, configuration and crontab entry
+- name: Remove restic, autorestic, configuration and crontab
+  when: autorestic_state == 'absent'
   block:
     - name: Remove restic binary
       ansible.builtin.file:
@@ -17,17 +18,19 @@
         path: ~/.autorestic.yml
         state: absent
 
-    - name: Remove autorestic crontab PATH
-      ansible.builtin.cron:
-        name: PATH
-        env: true
-        job: /usr/local/bin:/usr/bin:/bin
-        state: absent
+    - name: Remove autorestic crontab
+      when: autorestic_cron
+      block:
+        - name: Remove autorestic crontab PATH
+          ansible.builtin.cron:
+            name: PATH
+            env: true
+            job: /usr/local/bin:/usr/bin:/bin
+            state: absent
 
-    - name: Remove autorestic crontab job
-      ansible.builtin.cron:
-        name: Configure autorestic crontab job
-        minute: "*/5"
-        job: autorestic -c ~/.autorestic.yml --ci cron > /tmp/autorestic.log 2>&1
-        state: absent
-  when: autorestic_state == 'absent'
+        - name: Remove autorestic crontab job
+          ansible.builtin.cron:
+            name: Configure autorestic crontab job
+            minute: "*/5"
+            job: autorestic -c ~/.autorestic.yml --ci cron > /tmp/autorestic.log 2>&1
+            state: absent
