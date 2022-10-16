@@ -28,4 +28,4 @@
         minute: "*/5"
         job: autorestic -c ~/.autorestic.yml --ci cron > /tmp/autorestic.log 2>&1
         state: absent
-  when: autorestic_remove
+  when: autorestic_state == 'absent'
