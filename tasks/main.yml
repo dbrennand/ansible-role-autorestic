@@ -1,5 +1,10 @@
 ---
 # tasks file for autorestic
+- name: Override ansible_architecture
+  ansible.builtin.set_fact:
+    ansible_architecture: "{{ autorestic_architecture }}"
+    when: autorestic_architecture is defined
+
 - name: Install bzip2
   ansible.builtin.package:
     name: bzip2

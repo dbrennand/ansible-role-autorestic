@@ -11,10 +11,21 @@ Ansible role to configure backups using [autorestic](https://autorestic.vercel.a
 
 None.
 
+## Assumptions
+
+Places versioned executables into `/opt/autorestic/bin` and `/opt/restic/bin` links these into `/usr/local/bin`.
+Any previously installed versions (manually or per package manager) might interfer with this.
+
 ## Role Variables
 
 ```yaml
-autorestic_version: 1.7.3
+autorestic_architecture:
+```
+
+Overrides `ansible_architecture` in case you have some exotic combination. See dependencies.
+
+```yaml
+autorestic_version: 1.7.4
 autorestic_restic_version: 0.14.0
 ```
 
@@ -61,7 +72,22 @@ Whether or not to create an autorestic crontab entry to trigger automated backup
 
 ## Dependencies
 
-None.
+This role depends on precompiled binaries, published on github
+[restic/restic](https://github.com/restic/restic/releases/)
+[cupcakearmy/autorestic](https://github.com/cupcakearmy/autorestic/releases/)
+
+Currently supporte Linux binaries exist for:
+
+  - amd64
+  - arm
+  - arm64
+  - mips
+  - mipsle
+  - mips64
+  - mips64le
+  - ppc64le
+  - s390x
+  - 386
 
 ## Example Playbook
 

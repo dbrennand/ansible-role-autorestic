@@ -1,11 +1,17 @@
 ---
 # restic tasks file for autorestic
+- name: Ensure restic directory exist
+  ansible.builtin.file:
+    state: directory
+    path: /opt/restic/bin
+    mode: 0755
+    owner: root
+
 - name: "Download restic binary v{{ autorestic_restic_version }} for aarch64"
   # E.g., Raspberry Pi 4
   ansible.builtin.get_url:
     url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_arm64.bz2"
     dest: /tmp/restic.bz2
-    mode: 0755
   when: ansible_architecture == "aarch64"
 
 - name: "Download restic binary v{{ autorestic_restic_version }} for armv7l"
@@ -13,22 +19,43 @@
   ansible.builtin.get_url:
     url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_arm.bz2"
     dest: /tmp/restic.bz2
-    mode: 0755
   when: ansible_architecture == "armv7l"
 
 - name: "Download restic binary v{{ autorestic_restic_version }} for x86_64"
   ansible.builtin.get_url:
     url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_amd64.bz2"
     dest: /tmp/restic.bz2
-    mode: 0755
   when: ansible_architecture == "x86_64"
 
-- name: Extract and install restic # noqa no-changed-when
+- name: "Download restic binary v{{ autorestic_restic_version }} for other architectures "
+  # Generic list containing available linux builds
+  ansible.builtin.get_url:
+    url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_{{ item }}.bz2"
+    dest: /tmp/restic.bz2
+  when: ansible_architecture == item
+  with_items:
+    - mips
+    - mipsle
+    - mips64
+    - mips64le
+    - ppc64le
+    - s390x
+    - 386
+
+- name: Extract and install restic
   ansible.builtin.shell:
-    cmd: cd /tmp/ && bzip2 -f -d /tmp/restic.bz2 && mv /tmp/restic /usr/local/bin/
+    cmd: cd /tmp/ && bzip2 -f -d /tmp/restic.bz2 && mv /tmp/restic /opt/restic/bin/restic-{{ autorestic_restic_version }}
+    creates: /opt/restic/bin/restic-{{ autorestic_restic_version }}
   become: true
 
 - name: Ensure restic is executable
   ansible.builtin.file:
-    path: /usr/local/bin/restic
+    path: "/opt/restic/bin/restic-{{ autorestic_restic_version }}"
     mode: +x
+
+- name: Create symbolic link to the correct version
+  ansible.builtin.file:
+    src: /opt/restic/bin/restic-{{ autorestic_restic_version }}
+    path: /usr/local/bin/restic
+    state: link
+    force: true

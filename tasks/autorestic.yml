@@ -1,11 +1,17 @@
 ---
 # autorestic tasks file for autorestic
+- name: Ensure autorestic directory exist
+  ansible.builtin.file:
+    state: directory
+    path: /opt/autorestic/bin
+    mode: 0755
+    owner: root
+
 - name: "Download autorestic binary v{{ autorestic_version }} for aarch64"
   # E.g., Raspberry Pi 4
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_arm64.bz2" # noqa yaml[line-length]
     dest: /tmp/autorestic.bz2
-    mode: 0755
   when: ansible_architecture == "aarch64"
 
 - name: "Download autorestic binary v{{ autorestic_version }} for armv7l"
@@ -13,22 +19,43 @@
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_arm.bz2"
     dest: /tmp/autorestic.bz2
-    mode: 0755
   when: ansible_architecture == "armv7l"
 
 - name: "Download autorestic binary v{{ autorestic_version }} for x86_64"
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_amd64.bz2" # noqa yaml[line-length]
     dest: /tmp/autorestic.bz2
-    mode: 0755
   when: ansible_architecture == "x86_64"
 
-- name: Extract and install autorestic # noqa no-changed-when
+- name: "Download autorestic binary v{{ autorestic_version }} for other architectures"
+  # Generic list containing available linux builds
+  ansible.builtin.get_url:
+    url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_{{ item }}.bz2"
+    dest: /tmp/autorestic.bz2
+  when: ansible_architecture == item
+  with_items:
+    - mips
+    - mipsle
+    - mips64
+    - mips64le
+    - ppc64le
+    - s390x
+    - 386
+
+- name: Extract and install autorestic
   ansible.builtin.shell:
-    cmd: cd /tmp/ && bzip2 -f -d /tmp/autorestic.bz2 && mv /tmp/autorestic /usr/local/bin/
+    cmd: cd /tmp/ && bzip2 -f -d /tmp/autorestic.bz2 && mv /tmp/autorestic /opt/autorestic/bin/autorestic-{{ autorestic_version }}
+    creates: /opt/autorestic/bin/autorestic-{{ autorestic_version }}
   become: true
 
 - name: Ensure autorestic is executable
   ansible.builtin.file:
-    path: /usr/local/bin/autorestic
+    path: /opt/autorestic/bin/autorestic-{{ autorestic_version }}
     mode: +x
+
+- name: Create symbolic link to the correct version
+  file:
+    src: /opt/autorestic/bin/autorestic-{{ autorestic_version }}
+    path: /usr/local/bin/autorestic
+    state: link
+    force: true
