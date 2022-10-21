@@ -76,7 +76,7 @@ This role depends on precompiled binaries, published on github
 [restic/restic](https://github.com/restic/restic/releases/)
 [cupcakearmy/autorestic](https://github.com/cupcakearmy/autorestic/releases/)
 
-Currently supporte Linux binaries exist for:
+Currently supporte Linux binaries for:
 
   - amd64
   - arm

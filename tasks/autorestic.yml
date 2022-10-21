@@ -12,6 +12,8 @@
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_arm64.bz2" # noqa yaml[line-length]
     dest: /tmp/autorestic.bz2
+    mode: 0644
+    owner: root
   when: ansible_architecture == "aarch64"
 
 - name: "Download autorestic binary v{{ autorestic_version }} for armv7l"
@@ -19,12 +21,16 @@
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_arm.bz2"
     dest: /tmp/autorestic.bz2
+    mode: 0644
+    owner: root
   when: ansible_architecture == "armv7l"
 
 - name: "Download autorestic binary v{{ autorestic_version }} for x86_64"
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_amd64.bz2" # noqa yaml[line-length]
     dest: /tmp/autorestic.bz2
+    mode: 0644
+    owner: root
   when: ansible_architecture == "x86_64"
 
 - name: "Download autorestic binary v{{ autorestic_version }} for other architectures"
@@ -32,6 +38,8 @@
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_{{ item }}.bz2"
     dest: /tmp/autorestic.bz2
+    mode: 0644
+    owner: root
   when: ansible_architecture == item
   with_items:
     - mips
@@ -54,7 +62,7 @@
     mode: +x
 
 - name: Create symbolic link to the correct version
-  file:
+  ansible.builtin.file:
     src: /opt/autorestic/bin/autorestic-{{ autorestic_version }}
     path: /usr/local/bin/autorestic
     state: link
