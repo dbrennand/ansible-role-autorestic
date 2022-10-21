@@ -63,7 +63,7 @@ Whether or not to create an autorestic crontab entry to trigger automated backup
 autorestic_state: present
 ```
 
-Whether or not to remove restic, autorestic, configuration and crontab entry. Set to `absent` for removal.
+Whether or not to remove autorestic, restic, configuration and crontab entry. Set to `absent` for removal.
 
 > This will not affect any backends and their data.
 
