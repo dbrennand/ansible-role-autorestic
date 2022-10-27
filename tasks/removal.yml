@@ -4,11 +4,13 @@
   ansible.builtin.file:
     path: /usr/local/bin/autorestic
     state: absent
+  become: true
 
 - name: Remove autorestic configuration file
   ansible.builtin.file:
     path: ~/.autorestic.yml
     state: absent
+  become: true
 
 - name: Remove restic binary
   ansible.builtin.file:
