@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Include dbrennand.autorestic removal
+      ansible.builtin.include_role:
+        name: dbrennand.autorestic
+      vars:
+        autorestic_state: absent
