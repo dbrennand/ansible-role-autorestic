@@ -1,6 +1,6 @@
 ---
 # autorestic tasks file for autorestic
-- name: "Download autorestic binary for aarch64 at version {{ autorestic_version }}"
+- name: "Download autorestic binary for aarch64 v{{ autorestic_version }}"
   # E.g., Raspberry Pi 4
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_arm64.bz2" # noqa yaml[line-length]
@@ -8,7 +8,7 @@
     mode: 0755
   when: ansible_architecture == "aarch64"
 
-- name: "Download autorestic binary for armv7l at version {{ autorestic_version }}"
+- name: "Download autorestic binary for armv7l v{{ autorestic_version }}"
   # E.g., Raspberry Pi 3 (32bit)
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_arm.bz2"
@@ -16,7 +16,7 @@
     mode: 0755
   when: ansible_architecture == "armv7l"
 
-- name: "Download autorestic binary for x86_64 at version {{ autorestic_version }}"
+- name: "Download autorestic binary for x86_64 v{{ autorestic_version }}"
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_amd64.bz2" # noqa yaml[line-length]
     dest: /tmp/autorestic.bz2
