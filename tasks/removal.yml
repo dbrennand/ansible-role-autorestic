@@ -10,12 +10,12 @@
   ansible.builtin.file:
     path: ~/.autorestic.yml
     state: absent
-  become: true
 
 - name: Remove restic binary
   ansible.builtin.file:
     path: /usr/local/bin/restic
     state: absent
+  become: true
 
 - name: Remove autorestic crontab
   when: autorestic_cron
