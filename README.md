@@ -59,6 +59,14 @@ autorestic_cron: false
 
 Whether or not to create an autorestic crontab entry to trigger automated backups. Autorestic locations need to be configured with `cron`.
 
+```yaml
+autorestic_state: present
+```
+
+Whether or not to remove autorestic, restic, configuration and crontab entry. Set to `absent` for removal.
+
+> This will not affect any backends and their data.
+
 ## Dependencies
 
 None.
