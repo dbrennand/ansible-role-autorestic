@@ -1,0 +1,17 @@
+---
+- name: Prepare
+  hosts: all
+  pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+      when: ansible_distribution == "Debian"
+
+    - name: Update pacman cache
+      community.general.pacman:
+        update_cache: true
+      when: ansible_distribution == "Archlinux"
+  tasks:
+    - name: Include dbrennand.autorestic
+      ansible.builtin.include_role:
+        name: dbrennand.autorestic

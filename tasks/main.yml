@@ -5,6 +5,14 @@
     ansible_architecture: "{{ autorestic_architecture }}"
   when: autorestic_architecture is defined
 
+- name: Import removal tasks
+  ansible.builtin.import_tasks: removal.yml
+  when: autorestic_state == 'absent'
+
+- name: End play when autorestic_state is absent
+  ansible.builtin.meta: end_host
+  when: autorestic_state == 'absent'
+
 - name: Install bzip2
   ansible.builtin.package:
     name: bzip2
@@ -53,6 +61,7 @@
   when: autorestic_check
 
 - name: Configure autorestic crontab
+  when: autorestic_cron
   block:
     - name: Configure autorestic crontab PATH
       ansible.builtin.cron:
@@ -65,4 +74,3 @@
         name: Configure autorestic crontab job
         minute: "*/5"
         job: autorestic -c ~/.autorestic.yml --ci cron > /tmp/autorestic.log 2>&1
-  when: autorestic_cron

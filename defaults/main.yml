@@ -25,3 +25,4 @@ autorestic_install_dir: /opt/autorestic
 autorestic_restic_install_dir: /opt/restic
 autorestic_binary_dir: /usr/local/bin
 autorestic_restic_binary_dir: /usr/local/bin
+autorestic_state: present
