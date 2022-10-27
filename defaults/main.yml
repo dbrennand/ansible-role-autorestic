@@ -1,6 +1,6 @@
 ---
 # defaults file for autorestic
-autorestic_version: 1.7.3
+autorestic_version: 1.7.4
 autorestic_restic_version: 0.14.0
 autorestic_config: |-
   version: 2
