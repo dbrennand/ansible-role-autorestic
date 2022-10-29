@@ -7,11 +7,11 @@
 
 - name: Import removal tasks
   ansible.builtin.import_tasks: removal.yml
-  when: autorestic_state is "absent"
+  when: autorestic_state == "absent"
 
 - name: End play when autorestic_state is absent
   ansible.builtin.meta: end_host
-  when: autorestic_state is "absent"
+  when: autorestic_state == "absent"
 
 - name: Install bzip2
   ansible.builtin.package:
