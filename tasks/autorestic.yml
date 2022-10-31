@@ -64,6 +64,6 @@
 - name: Create symbolic link to the correct version
   ansible.builtin.file:
     src: "{{ autorestic_install_dir }}/autorestic-{{ autorestic_version }}"
-    path: "{{ autorestic_binary_dir }}/autorestic"
+    path: /usr/local/bin/autorestic
     state: link
     force: true
