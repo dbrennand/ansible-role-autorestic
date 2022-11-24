@@ -31,8 +31,15 @@ autorestic_restic_version: 0.14.0
 The version of [autorestic](https://autorestic.vercel.app/) and [restic](https://restic.net/) to install.
 
 ```yaml
-autorestic_install_directory: /opt/autorestic/bin
-autorestic_restic_install_directory: /opt/restic/bin
+autorestic_install_directory:
+  path: /opt/autorestic/bin
+  # Optional
+  # owner: owner
+  # group: group
+  # mode: 0700
+autorestic_restic_install_directory:
+  path: /opt/restic/bin
+  # ...
 ```
 
 The directories to install the autorestic and restic binaries at.
