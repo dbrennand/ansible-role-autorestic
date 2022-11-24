@@ -13,16 +13,15 @@ None.
 
 ## Assumptions
 
-Places versioned executables into `/opt/autorestic/bin` and `/opt/restic/bin` links these into `/usr/local/bin`.
-Any previously installed versions (manually or per package manager) might interfer with this.
+This role places the autorestic and restic binaries into `/opt/autorestic/bin` and `/opt/restic/bin` respectively. Symbolic links are created to `/usr/local/bin`.
 
 ## Role Variables
 
 ```yaml
-autorestic_architecture:
+autorestic_architecture: mips
 ```
 
-Overrides `ansible_architecture` in case you have some exotic combination. See dependencies.
+Overrides `ansible_architecture` in case you have some exotic combination. See [dependencies](#dependencies) for further details.
 
 ```yaml
 autorestic_version: 1.7.4
@@ -30,6 +29,13 @@ autorestic_restic_version: 0.14.0
 ```
 
 The version of [autorestic](https://autorestic.vercel.app/) and [restic](https://restic.net/) to install.
+
+```yaml
+autorestic_install_directory: /opt/autorestic/bin
+autorestic_restic_install_directory: /opt/restic/bin
+```
+
+The directories to install the autorestic and restic binaries at.
 
 ```yaml
 autorestic_config: |-
@@ -80,22 +86,12 @@ Whether or not to remove autorestic, restic, configuration and crontab entry. Se
 
 ## Dependencies
 
-This role depends on precompiled binaries, published on github
-[restic/restic](https://github.com/restic/restic/releases/)
-[cupcakearmy/autorestic](https://github.com/cupcakearmy/autorestic/releases/)
+This role depends on precompiled binaries published on GitHub:
 
-Currently supporte Linux binaries for:
+* [cupcakearmy/autorestic](https://github.com/cupcakearmy/autorestic/releases/)
+* [restic/restic](https://github.com/restic/restic/releases/)
 
-  - amd64
-  - arm
-  - arm64
-  - mips
-  - mipsle
-  - mips64
-  - mips64le
-  - ppc64le
-  - s390x
-  - 386
+When overriding `ansible_architecture`, refer to the release assets for supported binary architectures.
 
 ## Example Playbook
 
