@@ -2,8 +2,11 @@
 # removal tasks file for autorestic
 - name: Remove autorestic binary
   ansible.builtin.file:
-    path: /usr/local/bin/autorestic
+    path: "{{ item }}"
     state: absent
+  with_items:
+    - "{{ autorestic_install_directory.path }}"
+    - /usr/local/bin/autorestic
   become: true
 
 - name: Remove autorestic configuration file
@@ -13,8 +16,11 @@
 
 - name: Remove restic binary
   ansible.builtin.file:
-    path: /usr/local/bin/restic
+    path: "{{ item }}"
     state: absent
+  with_items:
+    - "{{ autorestic_restic_install_directory.path }}"
+    - /usr/local/bin/restic
   become: true
 
 - name: Remove autorestic crontab
