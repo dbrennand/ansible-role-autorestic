@@ -1,6 +1,6 @@
 ---
 # autorestic tasks file for autorestic
-- name: Ensure autorestic directory exist
+- name: Ensure autorestic install directory exists
   ansible.builtin.file:
     state: directory
     path: "{{ autorestic_install_directory }}"

@@ -1,6 +1,6 @@
 ---
 # restic tasks file for autorestic
-- name: Ensure restic directory exist
+- name: Ensure restic install directory exists
   ansible.builtin.file:
     state: directory
     path: "{{ autorestic_restic_install_directory }}"
