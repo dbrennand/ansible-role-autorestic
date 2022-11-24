@@ -3,7 +3,7 @@
 - name: Ensure autorestic directory exist
   ansible.builtin.file:
     state: directory
-    path: "{{ autorestic_install_dir }}/bin"
+    path: "{{ autorestic_install_directory }}"
     mode: 0755
     owner: root
 
@@ -52,18 +52,18 @@
 
 - name: Extract and install autorestic
   ansible.builtin.shell:
-    cmd: cd /tmp/ && bzip2 -f -d /tmp/autorestic.bz2 && mv /tmp/autorestic {{ autorestic_install_dir }}/autorestic-{{ autorestic_version }}
-    creates: "{{ autorestic_install_dir }}/autorestic-{{ autorestic_version }}"
+    cmd: cd /tmp/ && bzip2 -f -d /tmp/autorestic.bz2 && mv /tmp/autorestic {{ autorestic_install_directory }}/autorestic-{{ autorestic_version }}
+    creates: "{{ autorestic_install_directory }}/autorestic-{{ autorestic_version }}"
   become: true
 
 - name: Ensure autorestic is executable
   ansible.builtin.file:
-    path: "{{ autorestic_install_dir }}/autorestic-{{ autorestic_version }}"
+    path: "{{ autorestic_install_directory }}/autorestic-{{ autorestic_version }}"
     mode: +x
 
 - name: Create symbolic link to the correct version
   ansible.builtin.file:
-    src: "{{ autorestic_install_dir }}/autorestic-{{ autorestic_version }}"
+    src: "{{ autorestic_install_directory }}/autorestic-{{ autorestic_version }}"
     path: /usr/local/bin/autorestic
     state: link
     force: true

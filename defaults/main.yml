@@ -21,6 +21,6 @@ autorestic_config: |-
 autorestic_info: false
 autorestic_check: false
 autorestic_cron: false
-autorestic_install_dir: /opt/autorestic
-autorestic_restic_install_dir: /opt/restic
+autorestic_install_directory: /opt/autorestic/bin
+autorestic_restic_install_directory: /opt/restic/bin
 autorestic_state: present

@@ -3,7 +3,7 @@
 - name: Ensure restic directory exist
   ansible.builtin.file:
     state: directory
-    path: "{{ autorestic_restic_install_dir }}/bin"
+    path: "{{ autorestic_restic_install_directory }}"
     mode: 0755
     owner: root
 
@@ -52,18 +52,18 @@
 
 - name: Extract and install restic
   ansible.builtin.shell:
-    cmd: cd /tmp/ && bzip2 -f -d /tmp/restic.bz2 && mv /tmp/restic {{ autorestic_restic_install_dir }}/restic-{{ autorestic_restic_version }}
-    creates: "{{ autorestic_restic_install_dir }}/restic-{{ autorestic_restic_version }}"
+    cmd: cd /tmp/ && bzip2 -f -d /tmp/restic.bz2 && mv /tmp/restic {{ autorestic_restic_install_directory }}/restic-{{ autorestic_restic_version }}
+    creates: "{{ autorestic_restic_install_directory }}/restic-{{ autorestic_restic_version }}"
   become: true
 
 - name: Ensure restic is executable
   ansible.builtin.file:
-    path: "{{ autorestic_restic_install_dir }}/restic-{{ autorestic_restic_version }}"
+    path: "{{ autorestic_restic_install_directory }}/restic-{{ autorestic_restic_version }}"
     mode: +x
 
 - name: Create symbolic link to the correct version
   ansible.builtin.file:
-    src: "{{ autorestic_restic_install_dir }}/restic-{{ autorestic_restic_version }}"
+    src: "{{ autorestic_restic_install_directory }}/restic-{{ autorestic_restic_version }}"
     path: /usr/local/bin/restic
     state: link
     force: true
