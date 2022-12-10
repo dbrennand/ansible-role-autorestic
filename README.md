@@ -98,7 +98,7 @@ This role depends on precompiled binaries published on GitHub:
 * [cupcakearmy/autorestic](https://github.com/cupcakearmy/autorestic/releases/)
 * [restic/restic](https://github.com/restic/restic/releases/)
 
-When overriding `ansible_architecture`, refer to the release assets for supported binary architectures.
+When using `autorestic_architecture`, refer to the release assets for supported binary architectures.
 
 ## Example Playbook
 
