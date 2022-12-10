@@ -11,14 +11,38 @@ Ansible role to configure backups using [autorestic](https://autorestic.vercel.a
 
 None.
 
+## Assumptions
+
+This role places the autorestic and restic binaries into `/opt/autorestic/bin` and `/opt/restic/bin` respectively. Symbolic links are created to `/usr/local/bin`.
+
 ## Role Variables
 
 ```yaml
-autorestic_version: 1.7.3
+autorestic_architecture: mips
+```
+
+Overrides `ansible_architecture` in case you have some exotic combination. See [dependencies](#dependencies) for further details.
+
+```yaml
+autorestic_version: 1.7.4
 autorestic_restic_version: 0.14.0
 ```
 
 The version of [autorestic](https://autorestic.vercel.app/) and [restic](https://restic.net/) to install.
+
+```yaml
+autorestic_install_directory:
+  path: /opt/autorestic/bin
+  # Optional
+  # owner: owner
+  # group: group
+  # mode: 0700
+autorestic_restic_install_directory:
+  path: /opt/restic/bin
+  # ...
+```
+
+The directories to install the autorestic and restic binaries at.
 
 ```yaml
 autorestic_config: |-
@@ -69,7 +93,12 @@ Whether or not to remove autorestic, restic, configuration and crontab entry. Se
 
 ## Dependencies
 
-None.
+This role depends on precompiled binaries published on GitHub:
+
+* [cupcakearmy/autorestic](https://github.com/cupcakearmy/autorestic/releases/)
+* [restic/restic](https://github.com/restic/restic/releases/)
+
+When overriding `ansible_architecture`, refer to the release assets for supported binary architectures.
 
 ## Example Playbook
 
