@@ -41,6 +41,10 @@
   ansible.builtin.import_tasks: autorestic.yml
   when: autorestic_install_status.rc != 0 or not autorestic_install_status.stdout is search(autorestic_version)
 
+- name: Get facts to reset ansible_architecture
+  ansible.builtin.setup:
+  when: autorestic_architecture is defined
+
 - name: Create autorestic configuration file
   ansible.builtin.copy:
     content: "{{ autorestic_config }}"
