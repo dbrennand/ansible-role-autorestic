@@ -1,7 +1,7 @@
 ---
 # defaults file for autorestic
-autorestic_version: 1.7.4
-autorestic_restic_version: 0.14.0
+autorestic_version: 1.7.7
+autorestic_restic_version: 0.15.1
 autorestic_install_directory:
   path: /opt/autorestic/bin
 autorestic_restic_install_directory:
