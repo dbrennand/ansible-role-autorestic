@@ -24,8 +24,8 @@ autorestic_architecture: mips
 Overrides `ansible_architecture` in case you have some exotic combination. See [dependencies](#dependencies) for further details.
 
 ```yaml
-autorestic_version: 1.7.4
-autorestic_restic_version: 0.14.0
+autorestic_version: 1.7.7
+autorestic_restic_version: 0.15.1
 ```
 
 The version of [autorestic](https://autorestic.vercel.app/) and [restic](https://restic.net/) to install.

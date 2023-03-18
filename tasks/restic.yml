@@ -7,7 +7,7 @@
     owner: "{{ autorestic_restic_install_directory.owner | default(omit) }}"
     group: "{{ autorestic_restic_install_directory.group | default(omit) }}"
     mode: "{{ autorestic_restic_install_directory.mode | default('0755') }}"
-
+  become: true
 
 - name: "Download restic binary for aarch64 v{{ autorestic_restic_version }}"
   # E.g., Raspberry Pi 4
@@ -65,3 +65,4 @@
     path: /usr/local/bin/restic
     state: link
     force: true
+  become: true

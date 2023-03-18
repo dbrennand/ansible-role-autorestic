@@ -7,6 +7,7 @@
     owner: "{{ autorestic_install_directory.owner | default(omit) }}"
     group: "{{ autorestic_install_directory.group | default(omit) }}"
     mode: "{{ autorestic_install_directory.mode | default('0755') }}"
+  become: true
 
 - name: "Download autorestic binary for aarch64 v{{ autorestic_version }}"
   # E.g., Raspberry Pi 4
@@ -64,3 +65,4 @@
     path: /usr/local/bin/autorestic
     state: link
     force: true
+  become: true
