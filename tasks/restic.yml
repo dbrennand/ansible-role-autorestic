@@ -65,3 +65,4 @@
     path: /usr/local/bin/restic
     state: link
     force: true
+  become: true

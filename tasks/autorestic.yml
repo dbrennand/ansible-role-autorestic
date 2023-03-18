@@ -65,3 +65,4 @@
     path: /usr/local/bin/autorestic
     state: link
     force: true
+  become: true
