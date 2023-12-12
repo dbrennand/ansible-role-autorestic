@@ -26,3 +26,4 @@ autorestic_info: false
 autorestic_check: false
 autorestic_cron: false
 autorestic_state: present
+autorestic_verbose: false
