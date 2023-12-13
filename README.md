@@ -121,3 +121,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) for 
 [**dbrennand**](https://github.com/dbrennand) - *Author*
 
 [**whysthatso**](https://github.com/whysthatso) - *Contributor*
+
+[**PleaseStopAsking**](https://github.com/PleaseStopAsking) - *Contributor*
