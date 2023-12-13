@@ -78,7 +78,7 @@
         name: Configure autorestic crontab job
         minute: "*/5"
         job: |
-          {% if autorestic_verbose == true  %}
+          {% if autorestic_cron_verbose == true  %}
           autorestic -c ~/.autorestic.yml --ci cron -vvvvv > /tmp/autorestic.log 2>&1
           {% else %}
           autorestic -c ~/.autorestic.yml --ci cron > /tmp/autorestic.log 2>&1
