@@ -1,4 +1,3 @@
-
 image: ghcr.io/dbrennand/ansible-gitpod-workspace:latest
 
 vscode:

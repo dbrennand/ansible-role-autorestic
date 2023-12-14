@@ -79,9 +79,10 @@ Whether or not to run `autorestic check` to make sure backends are configured pr
 
 ```yaml
 autorestic_cron: false
+autorestic_cron_verbose: false
 ```
 
-Whether or not to create an autorestic crontab entry to trigger automated backups. Autorestic locations need to be configured with `cron`.
+Whether or not to create an autorestic crontab entry to trigger automated backups. Use `autorestic_cron_verbose` to enable verbose logging. Autorestic locations need to be configured with [`cron`](https://autorestic.vercel.app/location/cron).
 
 ```yaml
 autorestic_state: present
@@ -121,3 +122,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) for 
 [**dbrennand**](https://github.com/dbrennand) - *Author*
 
 [**whysthatso**](https://github.com/whysthatso) - *Contributor*
+
+[**PleaseStopAsking**](https://github.com/PleaseStopAsking) - *Contributor*

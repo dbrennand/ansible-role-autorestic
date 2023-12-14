@@ -25,4 +25,5 @@ autorestic_config: |-
 autorestic_info: false
 autorestic_check: false
 autorestic_cron: false
+autorestic_cron_verbose: false
 autorestic_state: present
