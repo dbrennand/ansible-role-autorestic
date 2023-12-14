@@ -49,7 +49,7 @@
   ansible.builtin.copy:
     content: "{{ autorestic_config }}"
     dest: ~/.autorestic.yml
-    mode: 0600
+    mode: "0600"
 
 - name: Run autorestic info
   ansible.builtin.command:
@@ -78,10 +78,8 @@
         name: Configure autorestic crontab job
         minute: "*/5"
         job: |
-          {% if autorestic_cron_verbose == true  %}
+          {% if autorestic_cron_verbose == true %}
           autorestic -c ~/.autorestic.yml --ci cron -vvvvv > /tmp/autorestic.log 2>&1
           {% else %}
           autorestic -c ~/.autorestic.yml --ci cron > /tmp/autorestic.log 2>&1
           {% endif %}
-
-
