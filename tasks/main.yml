@@ -47,7 +47,7 @@
 
 - name: Create autorestic configuration file
   ansible.builtin.copy:
-    content: "{{ autorestic_config }}"
+    content: "{{ autorestic_config | to_yaml }}"
     dest: ~/.autorestic.yml
     mode: "0600"
 
