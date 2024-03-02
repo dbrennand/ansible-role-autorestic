@@ -6,7 +6,7 @@ autorestic_install_directory:
   path: /opt/autorestic/bin
 autorestic_restic_install_directory:
   path: /opt/restic/bin
-autorestic_config: |-
+autorestic_config:
   version: 2
   locations:
     home:
@@ -14,7 +14,6 @@ autorestic_config: |-
       to: remote
       # Every Monday
       cron: "0 0 * * MON"
-
   backends:
     remote:
       type: b2

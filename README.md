@@ -45,7 +45,7 @@ autorestic_restic_install_directory:
 The directories to install the autorestic and restic binaries at.
 
 ```yaml
-autorestic_config: |-
+autorestic_config:
   version: 2
   locations:
     home:
@@ -53,7 +53,6 @@ autorestic_config: |-
       to: remote
       # Every Monday
       cron: "0 0 * * MON"
-
   backends:
     remote:
       type: b2
