@@ -123,3 +123,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) for 
 [**whysthatso**](https://github.com/whysthatso) - *Contributor*
 
 [**PleaseStopAsking**](https://github.com/PleaseStopAsking) - *Contributor*
+
+[**markstos**](https://github.com/markstos) - *Contributor*
