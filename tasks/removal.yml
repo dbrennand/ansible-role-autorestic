@@ -11,7 +11,7 @@
 
 - name: Remove autorestic configuration file
   ansible.builtin.file:
-    path: ~/.autorestic.yml
+    path: "{{ autorestic_config_file }}"
     state: absent
 
 - name: Remove restic binary
@@ -37,5 +37,5 @@
       ansible.builtin.cron:
         name: Configure autorestic crontab job
         minute: "*/5"
-        job: autorestic -c ~/.autorestic.yml --ci cron > /tmp/autorestic.log 2>&1
+        job: autorestic -c {{ autorestic_config_file }} --ci cron > /tmp/autorestic.log 2>&1
         state: absent

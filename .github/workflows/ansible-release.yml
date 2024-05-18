@@ -12,7 +12,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           path: "dbrennand.autorestic"
 
@@ -22,9 +22,9 @@ jobs:
       - id: role_name
         run: echo "::set-output name=role_name::$(yq -r '.galaxy_info.role_name' meta/main.yml)"
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - run: pip3 install ansible-core
 

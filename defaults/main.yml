@@ -21,6 +21,7 @@ autorestic_config:
       env:
         B2_ACCOUNT_ID: ID
         B2_ACCOUNT_KEY: Key
+autorestic_config_file: ~/.autorestic.yml
 autorestic_info: false
 autorestic_check: false
 autorestic_cron: false
