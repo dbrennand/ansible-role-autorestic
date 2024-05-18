@@ -9,7 +9,7 @@ jobs:
   molecule:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           path: dbrennand.autorestic
       - uses: gofrolist/molecule-action@v2
