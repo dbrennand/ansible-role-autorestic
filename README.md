@@ -131,3 +131,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) for 
 [**PleaseStopAsking**](https://github.com/PleaseStopAsking) - *Contributor*
 
 [**markstos**](https://github.com/markstos) - *Contributor*
+
+[**micxer**](https://github.com/micxer) - *Contributor*
