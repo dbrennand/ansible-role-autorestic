@@ -62,7 +62,13 @@ autorestic_config:
         B2_ACCOUNT_KEY: Key
 ```
 
-The autorestic YAML configuration to be placed into the `~/.autorestic.yml` file. See the [autorestic documentation](https://autorestic.vercel.app/config) for details on the YAML configuration.
+See the [autorestic documentation](https://autorestic.vercel.app/config) for details on the YAML configuration.
+
+```yaml
+autorestic_config_file: ~/.autorestic.yml
+```
+
+The autorestic YAML configuration to be placed into the `~/.autorestic.yml` file.
 
 ```yaml
 autorestic_info: false
