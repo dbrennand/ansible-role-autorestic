@@ -47,7 +47,7 @@
 
 - name: Create autorestic configuration file
   ansible.builtin.copy:
-    content: "{{ autorestic_config | to_yaml }}"
+    content: "{{ autorestic_config | to_nice_yaml(default_style='\"') }}"
     dest: "{{ autorestic_config_file }}"
     mode: "0600"
 
