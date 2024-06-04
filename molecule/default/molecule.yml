@@ -17,8 +17,9 @@ verifier:
 scenario:
   name: default
   test_sequence:
-    - destroy
     - dependency
+    - cleanup
+    - destroy
     - syntax
     - create
     - prepare
@@ -27,4 +28,5 @@ scenario:
     - check
     - side_effect
     - verify
+    - cleanup
     - destroy
