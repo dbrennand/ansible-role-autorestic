@@ -46,8 +46,8 @@
   when: autorestic_architecture is defined
 
 - name: Create autorestic configuration file
-  ansible.builtin.copy:
-    content: "{{ autorestic_config | to_yaml }}"
+  ansible.builtin.template:
+    src: "{{ autorestic_config_template }}"
     dest: "{{ autorestic_config_file }}"
     mode: "0600"
 
