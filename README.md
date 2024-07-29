@@ -1,6 +1,5 @@
 # Ansible Role: dbrennand.autorestic
 
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/dbrennand/ansible-role-autorestic)
 ![Ansible-Lint](https://github.com/dbrennand/ansible-role-autorestic/actions/workflows/ansible-lint.yml/badge.svg)
 ![Molecule](https://github.com/dbrennand/ansible-role-autorestic/actions/workflows/molecule.yml/badge.svg)
 ![Ansible-Release](https://github.com/dbrennand/ansible-role-autorestic/actions/workflows/ansible-release.yml/badge.svg)
@@ -63,6 +62,12 @@ autorestic_config:
 ```
 
 See the [autorestic documentation](https://autorestic.vercel.app/config) for details on the YAML configuration.
+
+```yaml
+autorestic_config_template: autorestic.yml.j2
+```
+
+The [`autorestic.yml.j2`](templates/autorestic.yml.j2) template to use for the autorestic YAML configuration. By default the content of `autorestic_config` is templated. This can be overridden to use a custom template. See [#14](https://github.com/dbrennand/ansible-role-autorestic/issues/14#issuecomment-2198394106) for an example.
 
 ```yaml
 autorestic_config_file: ~/.autorestic.yml
