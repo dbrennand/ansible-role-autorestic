@@ -5,8 +5,8 @@
     ansible_architecture: "{{ autorestic_architecture }}"
   when: autorestic_architecture is defined
 
-- name: Import removal tasks
-  ansible.builtin.import_tasks: removal.yml
+- name: Import absent tasks
+  ansible.builtin.import_tasks: absent.yml
   when: autorestic_state == "absent"
 
 - name: End play when autorestic_state is absent
