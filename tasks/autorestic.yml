@@ -1,6 +1,6 @@
 ---
 # autorestic tasks file for autorestic
-- name: Ensure autorestic install directory exists
+- name: autorestic | Ensure autorestic install directory exists
   ansible.builtin.file:
     path: "{{ autorestic_install_directory.path }}"
     state: directory
@@ -9,7 +9,7 @@
     mode: "{{ autorestic_install_directory.mode | default('0755') }}"
   become: true
 
-- name: "Download autorestic binary for aarch64 v{{ autorestic_version }}"
+- name: "autorestic | Download autorestic binary for aarch64 v{{ autorestic_version }}"
   # E.g., Raspberry Pi 4
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_arm64.bz2" # noqa yaml[line-length]
@@ -17,7 +17,7 @@
     mode: "0644"
   when: ansible_architecture == "aarch64"
 
-- name: "Download autorestic binary for armv7l v{{ autorestic_version }}"
+- name: "autorestic | Download autorestic binary for armv7l v{{ autorestic_version }}"
   # E.g., Raspberry Pi 3 (32bit)
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_arm.bz2"
@@ -25,14 +25,14 @@
     mode: "0644"
   when: ansible_architecture == "armv7l"
 
-- name: "Download autorestic binary for x86_64 v{{ autorestic_version }}"
+- name: "autorestic | Download autorestic binary for x86_64 v{{ autorestic_version }}"
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_amd64.bz2" # noqa yaml[line-length]
     dest: /tmp/autorestic.bz2
     mode: "0644"
   when: ansible_architecture == "x86_64"
 
-- name: "Download autorestic binary for other architectures v{{ autorestic_version }}"
+- name: "autorestic | Download autorestic binary for other architectures v{{ autorestic_version }}"
   # Generic list containing available linux builds
   ansible.builtin.get_url:
     url: "https://github.com/cupcakearmy/autorestic/releases/download/v{{ autorestic_version }}/autorestic_{{ autorestic_version }}_linux_{{ item }}.bz2"
@@ -48,18 +48,18 @@
     - s390x
     - 386
 
-- name: Extract and install autorestic
+- name: autorestic | Extract and install autorestic
   ansible.builtin.shell:
     cmd: cd /tmp/ && bzip2 -f -d /tmp/autorestic.bz2 && mv /tmp/autorestic {{ autorestic_install_directory.path }}/autorestic-{{ autorestic_version }}
     creates: "{{ autorestic_install_directory.path }}/autorestic-{{ autorestic_version }}"
   become: true
 
-- name: Ensure autorestic is executable
+- name: autorestic | Ensure autorestic is executable
   ansible.builtin.file:
     path: "{{ autorestic_install_directory.path }}/autorestic-{{ autorestic_version }}"
     mode: +x
 
-- name: Create symbolic link to the correct version
+- name: autorestic | Create symbolic link to the correct version
   ansible.builtin.file:
     src: "{{ autorestic_install_directory.path }}/autorestic-{{ autorestic_version }}"
     path: /usr/local/bin/autorestic

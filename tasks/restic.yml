@@ -1,6 +1,6 @@
 ---
 # restic tasks file for autorestic
-- name: Ensure restic install directory exists
+- name: restic | Ensure restic install directory exists
   ansible.builtin.file:
     path: "{{ autorestic_restic_install_directory.path }}"
     state: directory
@@ -9,7 +9,7 @@
     mode: "{{ autorestic_restic_install_directory.mode | default('0755') }}"
   become: true
 
-- name: "Download restic binary for aarch64 v{{ autorestic_restic_version }}"
+- name: "restic | Download restic binary for aarch64 v{{ autorestic_restic_version }}"
   # E.g., Raspberry Pi 4
   ansible.builtin.get_url:
     url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_arm64.bz2"
@@ -17,7 +17,7 @@
     mode: "0644"
   when: ansible_architecture == "aarch64"
 
-- name: "Download restic binary for armv7l v{{ autorestic_restic_version }}"
+- name: "restic | Download restic binary for armv7l v{{ autorestic_restic_version }}"
   # E.g., Raspberry Pi 3 (32bit)
   ansible.builtin.get_url:
     url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_arm.bz2"
@@ -25,14 +25,14 @@
     mode: "0644"
   when: ansible_architecture == "armv7l"
 
-- name: "Download restic binary for x86_64 v{{ autorestic_restic_version }}"
+- name: "restic | Download restic binary for x86_64 v{{ autorestic_restic_version }}"
   ansible.builtin.get_url:
     url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_amd64.bz2"
     dest: /tmp/restic.bz2
     mode: "0644"
   when: ansible_architecture == "x86_64"
 
-- name: "Download restic binary for other architectures v{{ autorestic_restic_version }}"
+- name: "restic | Download restic binary for other architectures v{{ autorestic_restic_version }}"
   # Generic list containing available linux builds
   ansible.builtin.get_url:
     url: "https://github.com/restic/restic/releases/download/v{{ autorestic_restic_version }}/restic_{{ autorestic_restic_version }}_linux_{{ item }}.bz2"
@@ -48,18 +48,18 @@
     - s390x
     - 386
 
-- name: Extract and install restic
+- name: restic | Extract and install restic
   ansible.builtin.shell:
     cmd: cd /tmp/ && bzip2 -f -d /tmp/restic.bz2 && mv /tmp/restic {{ autorestic_restic_install_directory.path }}/restic-{{ autorestic_restic_version }}
     creates: "{{ autorestic_restic_install_directory.path }}/restic-{{ autorestic_restic_version }}"
   become: true
 
-- name: Ensure restic is executable
+- name: restic | Ensure restic is executable
   ansible.builtin.file:
     path: "{{ autorestic_restic_install_directory.path }}/restic-{{ autorestic_restic_version }}"
     mode: +x
 
-- name: Create symbolic link to the correct version
+- name: restic | Create symbolic link to the correct version
   ansible.builtin.file:
     src: "{{ autorestic_restic_install_directory.path }}/restic-{{ autorestic_restic_version }}"
     path: /usr/local/bin/restic
