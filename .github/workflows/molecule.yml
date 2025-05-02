@@ -1,5 +1,5 @@
 name: Molecule
-on: [push, pull_request]
+on: [pull_request]
 
 defaults:
   run:
