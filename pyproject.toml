@@ -7,3 +7,8 @@ requires-python = ">=3.13"
 dependencies = [
     "ansible-dev-tools>=25.5.0",
 ]
+
+[dependency-groups]
+dev = [
+    "molecule-plugins[docker]>=23.7.0",
+]
