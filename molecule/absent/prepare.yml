@@ -1,0 +1,11 @@
+---
+- name: Prepare
+  hosts: molecule
+  pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+  tasks:
+    - name: Include dbrennand.autorestic
+      ansible.builtin.include_role:
+        name: dbrennand.autorestic
