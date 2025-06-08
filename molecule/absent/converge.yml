@@ -1,8 +1,8 @@
 ---
 - name: Converge
-  hosts: all
+  hosts: molecule
   tasks:
-    - name: Include dbrennand.autorestic removal
+    - name: Include dbrennand.autorestic autorestic_state absent
       ansible.builtin.include_role:
         name: dbrennand.autorestic
       vars:

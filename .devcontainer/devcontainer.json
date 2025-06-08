@@ -1,5 +1,5 @@
 {
-    "image": "ghcr.io/ansible/community-ansible-dev-tools:v24.7.2",
+    "image": "ghcr.io/ansible/community-ansible-dev-tools:v25.5.0",
     "customizations": {
         "vscode": {
             "extensions": [

@@ -1,7 +1,7 @@
 ---
 # defaults file for autorestic
-autorestic_version: 1.7.7
-autorestic_restic_version: 0.15.1
+autorestic_version: 1.8.3
+autorestic_restic_version: 0.18.0
 autorestic_install_directory:
   path: /opt/autorestic/bin
 autorestic_restic_install_directory:
@@ -17,7 +17,7 @@ autorestic_config:
   backends:
     remote:
       type: b2
-      path: 'myBucket:backup/home'
+      path: "myBucket:backup/home"
       env:
         B2_ACCOUNT_ID: ID
         B2_ACCOUNT_KEY: Key
